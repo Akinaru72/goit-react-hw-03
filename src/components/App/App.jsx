@@ -8,8 +8,10 @@ import css from "./App.module.css";
 
 export default function App() {
   const [contacts, setContacts] = useState(() => {
-    const localContacts = localStorage.getItem("localContacts");
-    return localContacts ? JSON.parse(localContacts) : initContacts;
+    const saved = localStorage.getItem("localContacts");
+    if (!saved) return initContacts;
+    const parsed = JSON.parse(saved);
+    return parsed.length === 0 ? initContacts : parsed;
   });
 
   const [filter, setFilter] = useState("");

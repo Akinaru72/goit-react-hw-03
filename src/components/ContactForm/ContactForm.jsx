@@ -37,12 +37,24 @@ export default function ContactForm({ onAdd }) {
         <label className={css.label} htmlFor="name">
           Name
         </label>
-        <Field className={css.input} type="text" name="name" />
+        <Field
+          id="name"
+          className={css.input}
+          type="text"
+          name="name"
+          autoComplete="name"
+        />
         <ErrorMessage className={css.error} name="name" component="span" />
         <label className={css.label} htmlFor="number">
           Number
         </label>
-        <Field className={css.input} type="tel" name="number" />
+        <Field
+          id="number"
+          className={css.input}
+          type="tel"
+          name="number"
+          autoComplete="tel"
+        />
         <ErrorMessage className={css.error} name="number" component="span" />
         <button type="submit" className={css.btn}>
           Add contact
