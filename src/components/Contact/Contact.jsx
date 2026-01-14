@@ -1,25 +1,21 @@
-import { BsFillTelephoneFill } from "react-icons/bs";
-import { FaUser } from "react-icons/fa";
 import css from "./Contact.module.css";
+import { IoPersonSharp } from "react-icons/io5";
+import { BsTelephoneFill } from "react-icons/bs";
 
-const Contact = ({ data: { id, name, number }, onDelete }) => {
+export default function Contact({ id, name, number, onDelete }) {
   return (
-    <div className={css.item}>
-      <div>
-        <p className={css.context}>
-          <FaUser />
-          {name}
-        </p>
-        <p className={css.context}>
-          <BsFillTelephoneFill />
-          {number}
-        </p>
-      </div>
-      <button className={css.btn} onClick={() => onDelete(id)}>
+    <div className={css.contact}>
+      <ul className={css.data}>
+        <li>
+          <IoPersonSharp /> {name}
+        </li>
+        <li>
+          <BsTelephoneFill /> {number}
+        </li>
+      </ul>
+      <button onClick={() => onDelete(id)} className={css.btn}>
         Delete
       </button>
     </div>
   );
-};
-
-export default Contact;
+}

@@ -1,32 +1,31 @@
 import { useState, useEffect } from "react";
+
+import ContactList from "../ContactList/ContactList";
 import ContactForm from "../ContactForm/ContactForm";
 import SearchBox from "../SearchBox/SearchBox";
-import ContactList from "../ContactList/ContactList";
-
+import initContacts from "../../data/contacts.json";
 import css from "./App.module.css";
 
-import initialContacts from "../../data/contacts.json";
-
-const App = () => {
+export default function App() {
   const [contacts, setContacts] = useState(() => {
-    const savedContacts = localStorage.getItem("contacts");
-    return savedContacts ? JSON.parse(savedContacts) : initialContacts;
+    const localContacts = JSON.parse(localStorage.getItem("localContacts"));
+    return localContacts.length > 0 ? localContacts : initContacts;
   });
 
   const [filter, setFilter] = useState("");
+
   useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
+    localStorage.setItem("localContacts", JSON.stringify(contacts));
   }, [contacts]);
 
   const addContact = (newContact) => {
     setContacts((prevContacts) => [...prevContacts, newContact]);
   };
 
-  const deleteContact = (contactId) => {
-    console.log(contactId);
-    setContacts((prevContact) => {
-      return prevContact.filter((contact) => contact.id !== contactId);
-    });
+  const deleteContact = (idContact) => {
+    setContacts((prevContacts) =>
+      prevContacts.filter((contact) => contact.id !== idContact)
+    );
   };
 
   const visibleContacts = contacts.filter((contact) =>
@@ -41,6 +40,4 @@ const App = () => {
       <ContactList contacts={visibleContacts} onDelete={deleteContact} />
     </div>
   );
-};
-
-export default App;
+}

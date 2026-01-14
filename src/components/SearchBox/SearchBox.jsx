@@ -1,16 +1,15 @@
 import css from "./SearchBox.module.css";
 
-const SearchBox = ({ value, onFilter }) => {
+export default function SearchBox({ value, onFilter }) {
   return (
-    <div className={css.container}>
-      <label className={css.label}>Find contacts by name</label>
+    <div className={css.searchbox}>
+      <p>Find contacts by Name</p>
       <input
-        className={css.inputField}
-        type="type"
+        className={css.inputfield}
+        type="text"
         value={value}
-        onChange={(e) => onFilter(e.target.value)}
+        onChange={(event) => onFilter(event.target.value)}
       />
     </div>
   );
-};
-export default SearchBox;
+}
